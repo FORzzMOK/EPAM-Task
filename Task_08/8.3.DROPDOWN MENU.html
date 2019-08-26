@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta, title etc. -->
+    <style type="text/css">
+    	a{
+    		font-size: 15px;
+    	}
+	    .file {
+	    	text-decoration: underline;
+	      	background-color: white;
+		    color: blue;
+		    border: none;
+		    cursor: pointer;
+		    padding: 7px;
+		    margin-top:20px;
+		}
+
+		.dropdown_file:hover .file {
+			text-decoration: none;
+			color: black;
+			border-radius: 8px 8px 0px 0px;
+			box-shadow: 0 -4px 5px rgba(0,0,0,0.5);
+		}
+
+		.dropdown_file {
+		    position: absolute;
+		    display: inline-block;
+		}
+		.dropdown-child_file {
+		    display: none;
+		    background-color: white;
+		    min-width: 100px;
+		    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+		}
+		.dropdown-child_file a {
+		    color: blue;
+		    padding: 3px;
+		    text-decoration: none;
+		    display: block;
+		}
+		.dropdown_file:hover .dropdown-child_file {
+		    display: block;
+		}
+		.edit {
+			text-decoration: underline;
+	      	background-color: white;
+		    color: blue;
+		    border: none;
+		    cursor: pointer;
+		    padding: 7px;
+		    margin-top:20px;
+		}
+
+		.dropdown_edit:hover .edit {
+			text-decoration: none;
+			color: black;
+			border-radius: 8px 8px 0px 0px;
+			box-shadow: 0 -4px 5px rgba(0,0,0,0.5);
+		}
+
+		.dropdown_edit {
+
+		    position: absolute;
+		    left: 80px;
+		    display: inline-block;
+		}
+		.dropdown-child_edit {
+		    display: none;
+		    background-color: white;
+		    min-width: 100px;
+		    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+		}
+		.dropdown-child_edit a {
+		    color: blue;
+		    padding: 3px;
+		    text-decoration: none;
+		    display: block;
+		}
+		.dropdown_edit:hover .dropdown-child_edit {
+		    display: block;
+		}
+    </style>
+  </head>
+  <body>
+	<div class="dropdown_edit">
+	  <button class="edit">Правка</button>
+	  <div class="dropdown-child_edit">
+	    <a href="http://www.мойдомен.ru/page1.html">Вырезать</a>
+	    <a href="http://www.мойдомен.ru/page2.html">Копировать</a>
+	    <a href="http://www.мойдомен.ru/page3.html">Вставить</a>
+	    <a href="http://www.мойдомен.ru/page4.html">Удалить</a>
+  	  </div>
+	</div>
+	<div class="dropdown_file">
+	  <button class="file">Файл</button>
+	  <div class="dropdown-child_file">
+	    <a href="http://www.мойдомен.ru/page1.html">Новый</a>
+	    <a href="http://www.мойдомен.ru/page2.html">Открыть</a>
+	    <a href="http://www.мойдомен.ru/page3.html">Сохранить</a>
+	    <a href="http://www.мойдомен.ru/page4.html">Закрыть</a>
+  	  </div>
+	</div>
+  </body>

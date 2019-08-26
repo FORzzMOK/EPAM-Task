@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+    	body{
+    		background: #4d637a;
+    	}
+    	.container{
+    		position: relative;
+    		top: 15px;
+    	}
+    	.back_container{
+    		background: #F9F9F9;
+    		position: absolute;
+    		left: 50%;
+    		margin-left: -450px;
+    		top: 50px;
+    		border: 1px solid transparent;
+    		border-radius: 10px;
+    		width: 900px;
+    		height: 250px;
+    		box-shadow: 0 20px 15px rgba(0,0,0,0.2);
+    	}
+    	.column1{
+    		position: absolute;
+    		width: 300px;
+    		height: 220px;
+    		border-right: 1px solid #B6B6B6;
+    	}
+    	.column2{
+    		left: 300px;
+    		position: absolute;
+    		width: 300px;
+    		height: 220px;
+    		border-right: 1px solid #B6B6B6;
+    	}
+    	.column3{
+    		left: 600px;
+    		position: absolute;
+    		width: 300px;
+    		height: 220px;
+    		
+    	}
+    	.first_image{
+    		position: relative;
+    		width: 80px;
+    		height: 80px;
+    		margin-left: -40px;
+    		left: 50%;
+    	}
+    	.orange_words{
+    		font-size: 17px;
+    		text-align: center;
+    		font-weight: bolder;
+    		color: #C43F38;
+    	}
+    	.coins{
+    		text-align: center;
+    	}
+    	.input_button{
+    		width: 100px;
+    		height: 35px;
+    		position: relative;
+    		left: 50%;
+    		margin-left: -50px;
+    		color: white;
+    		background-color: #C43F38;
+    		border: none;
+    	}
+    </style>
+  </head>
+  <body>
+    <div class = "back_container">
+    	<div class = "container">
+		   <div class = "column1">
+		   	<img class = "first_image" src="icons8-сетевой-менеджер-64.png">
+		   	<p class = "orange_words">Виртуальный хостинг</p>
+		   	<p class = "coins">3.95$ в месяц</p>
+		   	<input class = "input_button" type="button" value="Подробнее"/>
+		   </div>
+		   <div class = "column2">
+		   	<img class = "first_image" src="icons8-облако-96.png">
+		   	<p class = "orange_words">Облачный хостинг</p>
+		   	<p class = "coins">68.95$ в месяц</p>
+		   	<input class = "input_button" type="button" value="Подробнее"/>
+		   </div>
+		   <div class = "column3">
+		   	<img class = "first_image" src="icons8-база-данных-100.png">
+		   	<p class = "orange_words">Выделенный сервер</p>
+		   	<p class = "coins">217.95$ в месяц</p>
+		   	<input class = "input_button" type="button" value="Подробнее"/>
+		   </div>
+	    </div>
+	</div>
+  </body>

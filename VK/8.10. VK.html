@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+      <style>
+        *{
+          font-family: 'Calibri';
+        }
+        body{
+          background-color: #eeeff1;
+      
+        }
+        header{
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          right: 0px;
+          width: 100%;
+          height: 45px;
+          background-color: #4876a9;
+        }
+        header input{
+          position: relative;
+          width: 40px;
+          height: 40px;
+          top: 0px;
+          display: inline;
+          border: none;
+          background-color: white;
+        }
+        section{
+          padding-top: 10px;
+          padding-bottom: 10px;
+          position: absolute;
+          border: 1px solid #D0D0D0;
+          width: 550px;
+          left: 50%;
+          margin-left: -300px;
+          top: 60px;
+          border-radius: 5px;
+          margin-bottom: 30px;
+          background-color: white;
+        }
+        nav{
+          position: absolute;
+          width: 150px;
+          left: 50%;
+          margin-left: -470px;
+          top: 60px;
+        }
+        
+        aside{
+          padding-top: 10px;
+          padding-bottom: 10px;
+          position: absolute;
+          width: 240px;
+          border: 1px solid #D0D0D0;
+          border-radius: 5px;
+          left: 50%;
+          margin-left: 270px;
+          top: 60px;
+          background-color: white;
+
+        }
+        aside div{
+          width: 240px;
+          height: 33px;
+        }
+        aside button{
+          width: 100%;
+          height: 100%;
+          border: none;
+          background-color: white;
+          
+          font-size: 15px;
+          color: #4876a9;
+          text-align: left;
+          padding-left: 20px;
+        }
+        aside button{
+          width: 100%;
+          height: 100%;
+          border: none;
+          background-color: white;
+          font-size: 15px;
+          color: #1d497a;
+          text-align: left;
+          padding-left: 20px;
+        }
+        aside button:hover{
+          background-color: rgba(180,181,184,0.3);
+        }
+        nav div{
+          width: 150px;
+          height: 28px;
+        }
+        nav button{
+          width: 100%;
+          height: 100%;
+          border: none;
+          background-color: #eeeff1;
+          text-align: left;
+          padding-left: 20px;
+          color: #1d497a;
+          font-size: 15px;
+        }
+        nav button:hover{
+          background-color: rgba(180,181,184,0.3);
+        }
+        .VK{
+          position: absolute;
+          left: 50%;
+          margin-left: -450px;
+          background-image: url(vk.png)
+        }
+        .search{
+          position: absolute;
+          top: 5px;
+          width: 280px;
+          height: 30px;
+          left: 50%;
+          margin-left: -300px;
+          background-image: url(vk.search)
+          border:none;
+          border-radius: 20px;
+          background-color: #1d497a;
+        }
+        .kolokol{
+          position: absolute;
+          left: 50%;
+          background-image: url(vk.kolokol)
+        }
+        .nota{
+          position: absolute;
+          left: 50%;
+          margin-left: 50px;
+          background-image: url(vk.nota)
+        }
+        .i_m{
+          position: absolute;
+          left: 50%;
+          margin-left: 450px;
+          background-image: url(vk.i_m)
+        }
+        section p{
+          display: inline;
+          position: relative;
+          top: 17px;
+        }
+        section div{
+          position: relative;
+          width: 90%;
+          height: 60px;
+          margin: auto;
+          border-bottom: 1px solid #D0D0D0;
+          font-size: 14px;
+        }
+        .general{
+          margin-top: 18px;
+          width: 100%;
+          height: 30px;
+        }
+        .general p{
+          
+          position: relative;
+          top: -10px;
+          left: 20px;
+          font-size: 18px;
+        }
+        .menu button{
+          top: 17px;
+          position: relative;
+          border: none;
+          background-color: white;
+          left: 100px;
+          font-size: 14px;
+          color: #1d497a;
+        }
+        .menu button:hover{
+          text-decoration: underline;
+        }
+        section ul{
+          position: relative;
+          left: 155px;
+          top: -15px;
+        }
+        section .prof{
+          height: 90px;
+        }
+        section .content{
+          height: 90px;
+        }
+        section .delete{
+          border: none;
+          border-top: 1px solid #D0D0D0;
+          height: 50px;
+          width: 550px;
+        }
+        section button{
+          border: none;
+          color: #231B46;
+          background-color: white;
+          font-size: 14px;
+        }
+        section .delete button{
+          width: 300px;
+          left: 50%;
+          margin-left: -150px;
+          top: 20px;
+        }
+        section button:hover{
+          text-decoration: underline;
+        }
+        section .language{
+          border: none;
+        }
+        section input{
+          display: inline;
+          position: relative;
+          top: 18px;
+        }
+        section button{
+          display: inline;
+          position: relative;
+          top: 18px;
+        }
+        section .password input{
+          left: 130px;
+        }
+        section .post input{
+          left: 61px;
+        }
+        section .telefon input{
+          left: 73px;
+        }
+        section .addres input{
+          left: 77px;
+        }
+        section .language input{
+          left: 143px;
+        }
+
+        section .password button{
+          left: 200px;
+        }
+        section .post button{
+          left: 131px;
+        }
+        section .telefon button{
+          left: 143px;
+        }
+        section .addres button{
+          left: 147px;
+        }
+        section .language button{
+          left: 213px;
+        }
+
+      </style>
+  </head>
+
+  <body>
+      <header>
+        <input class = "VK" type="button" value=" ">
+        <input class = "search" type="text" size="20">
+        <input class = "kolokol" type="button" value=" ">
+        <input class = "nota" type="button" value=" ">
+        <input class = "i_m" type="button" value=" ">
+      </header>
+      <nav>
+        <div><button>Моя страница</button></div>
+        <div><button>Новости</button></div>
+        <div><button>Сообщения</button></div>
+        <div><button>Друзья</button></div>
+        <div><button>Сообщества</button></div>
+        <div><button>Фотографии</button></div>
+        <div><button>Музыка</button></div>
+        <div><button>Видео</button></div>
+        <div><button>Игры</button></div>
+        <div><button>VK Pay</button></div>
+        <div><button>Закладки</button></div>
+        <div><button>Документы</button></div>
+      </nav>
+      <section>
+        <div class = "general">
+          <p>Общее</p>
+        </div>
+        <div class = "menu">
+          <p>Меню сайта</p>
+          <button>Настроить отображение пунктов меню</button>
+        </div>
+        <div class = "prof">
+          <p>Настройки профиля</p>
+          <ul>
+            <li>Скрывать блок подарков</li>
+            <li>При открытии профиля показывать мои записи</li>
+            <li>Отключить комментирование записей</li>
+            <li>Специальные возможности</li>
+          </ul>
+        </div>
+        <div class = "content">
+          <p>Настройки контента</p>
+          <ul>
+            <li>Автоматически воспроизводить видео</li>
+            <li>Автоматически воспроизводить GIF-анимации</li>
+            <li>Подсказывать стикеры в полях ввода</li>
+            <li>Автоматически отмечать друзей на фотографиях</li>
+          </ul>
+        </div>
+        <div class = "password">
+          <p>Пароль</p>
+          <input type="text" size="20">
+          <button class = "myButton">Изменить</button>
+        </div>
+        <div class = "post">
+          <p>Электронная почта</p>
+          <input type="text" size="20">
+          <button class = "myButton">Изменить</button>
+        </div>
+        <div class = "telefon">
+          <p>Номер телефона</p>
+          <input type="text" size="20">
+          <button class = "myButton">Изменить</button>
+        </div>
+        <div class = "addres">
+          <p>Адрес страницы</p>
+          <input type="text" size="20">
+          <button class = "myButton">Изменить</button>
+        </div>
+        <div class = "language">
+          <p>Язык</p>
+          <input type="text" size="20">
+          <button class = "myButton">Изменить</button>
+        </div>
+        <div class = "delete">
+          <button>Вы можете удалить свою страницу</button>
+        </div>
+      </section>
+      <aside>
+        <div><button>Общее</button></div>
+        <div><button>Безопастность</button></div>
+        <div><button>Приватность</button></div>
+        <div><button>Уведомления</button></div>
+        <div><button>Черный список</button></div>
+        <div><button>Настройки приложений</button></div>
+        <div><button>Мобыльные сервисы</button></div>
+        <div><button>Платежи, подписки, переводы</button></div>
+      </aside>
+  </body>
+</html>

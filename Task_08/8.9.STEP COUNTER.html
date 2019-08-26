@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+  <head>
+      <style>
+        .myDiv label {
+          position: relative;
+          display: inline-block;
+          width: 100%;
+          height: 100%;
+        }
+        
+        .myDiv label .text {
+          position: absolute;
+          z-index: -1;
+          background: linear-gradient(0deg, #ccc, #999 50%, #ccc);
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+        }
+        .myDiv label input:checked + span {
+          color: #fff;
+          background: linear-gradient(0deg, #B2E28F, #64C51D 50%, #B2E28F);  
+        }
+        .myDiv label input {
+          position: absolute;
+          z-index: -1;
+          visibility: hidden;
+        }
+        .box {
+          width: 500px;
+          padding-top: 150px;
+          margin: 0 auto;
+          font-size: 0;
+          text-align: center;
+        }
+        .myDiv {
+          position: relative;
+          display: inline-block;
+          font-size: 14px;
+          line-height: 30px;
+          width: 90px;
+          height: 30px;  
+        }
+        .myDiv::before, .myDiv::after {
+          content: '';
+          position: absolute;
+          right: 0;
+          z-index: 1;
+          width: 6px;
+          height: 50%; 
+          background: #fff;  
+        }
+        .myDiv::after {
+          bottom: 0;
+          transform: skewX(-25deg);
+          transform-origin: 0 100%;
+        }
+        .myDiv::before {
+          top: 0;
+          transform: skewX(25deg);
+          transform-origin: 0 0;
+        }
+        .myDiv:last-child::before,
+        .myDiv:last-child::after {
+          display: none;
+        }
+      </style>
+  </head>
+
+  <body>
+      <div class="box">
+        <div class="myDiv">
+          <label><input type="radio" name="myDiv"><span class="text">Шаг 1</span></label>
+        </div>
+        <div class="myDiv">
+          <label><input type="radio" name="myDiv"><span class="text">Шаг 2</span></label>
+        </div>
+        <div class="myDiv">
+          <label><input type="radio" name="myDiv"><span class="text">Шаг 3</span></label>
+        </div>
+        <div class="myDiv">
+          <label><input type="radio" name="myDiv"><span class="text">Шаг 4</span></label>
+        </div>
+      </div>
+  </body>
+</html>
