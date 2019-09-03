@@ -41,6 +41,14 @@
 	Back.onclick = function() {
 		document.location.href = pageList[0];
 	}
+	Start.onclick = function() {
+		flag = false;
+		window.onload = startTimer();
+		
+	}
+	Stop.onclick = function() {
+		flag = true;
+	}
   </script>
   <script src="9.4.SIMPLE GALLERY.js"></script>
 </body>
