@@ -21,7 +21,7 @@
     if (s == 0) {
       if (m == 0) {
         if (h == 0) {
-          document.location.href = pageList[1];
+          qest();
           return;
         }
         h--;
@@ -39,6 +39,21 @@
     }
 	Back.onclick = function() {
 		document.location.href = pageList[0];
+	}
+	Start.onclick = function() {
+		flag = false;
+		window.onload = startTimer();
+	}
+	Stop.onclick = function() {
+		flag = true;
+	}
+	function qest(){
+		if(confirm("Хотите начать сначала?") == true){
+			document.location.href = "first page.html";
+		}
+		else{
+			window.close();
+		}
 	}
   </script>
   <script src="9.4.SIMPLE GALLERY.js"></script>
