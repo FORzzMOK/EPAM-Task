@@ -11,6 +11,7 @@
   <button id = "Stop">Stop</button>
   <script type="text/javascript">
   var pageList = ["fourth page.html", "fifth page.html"];
+  var flag = false;
   function startTimer() {
     var my_timer = document.getElementById("my_timer");
     var time = my_timer.innerHTML;
@@ -31,6 +32,9 @@
       m--;
       if (m < 10) m = "0" + m;
       s = 59;
+    }
+    if(flag == true){
+    	return;
     }
     else s--;
     if (s < 10) s = "0" + s;
