@@ -1,0 +1,150 @@
+<head>
+  <meta charset="utf-8">
+  <style>
+    .selected {
+      background: skyblue;
+    }
+    .selected_1 {
+      background: black;
+    }
+    li {
+      position: relative;
+      top: -15px;
+      left: -30px;
+      cursor: pointer;
+      list-style-type: none;
+      width: 100%;
+    }
+    .DivAvailable{
+        box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+    }
+    .DivSelected{
+        box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        position: absolute;
+        left: 152px;
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+    }
+    p{
+      position: relative;
+      left: 35px;
+      top:15px;
+      display: inline-block;
+    }
+    .myButton button{
+      box-shadow: 0 0 5px rgba(0,0,0,0.5);
+      width: 40px;
+      margin: 2px;
+      display: block;
+      cursor: pointer;
+    }
+    .myButton{
+
+      position: relative;
+      top: 110px;
+      left: 36px;
+      width: 50px;
+      display: inline-block;
+    }
+    #ButtonOption{
+      cursor: pointer;
+    }
+
+  </style>
+  <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+</head>
+<body>
+  <p>Available</p>
+    <div id = "divButton" class = "DivAvailable">
+      <ul id="ul_1">
+        <li >Option 1</li>
+        <li id = "ButtonOption_1">Option 2</li>
+        <li id = "ButtonOption">Option 3</li>
+        <li id = "ButtonOption">Option 4</li>
+        <li id = "ButtonOption">Option 5</li>
+      </ul>
+    </div>
+    <div class = "myButton">
+      <button id = "myButton_1"> >> </button>
+      <button id = "myButton_2"> > </button>
+      <button id = "myButton_3"> < </button>
+      <button id = "myButton_4"> << </button>
+    </div>
+    <p>Selected</p>
+    <div id = "divButton" class = "DivSelected">
+      <ul id="ul_2">
+      </ul>
+    </div>
+
+  <script>
+    ul_1.onclick = function(event) {
+      if (event.target.tagName != "LI") return;
+
+      if (event.ctrlKey || event.metaKey) {
+        toggleSelect(event.target);
+      } else {
+        singleSelect(event.target, ul_1);
+      }
+    }
+    ul_2.onclick = function(event) {
+      if (event.target.tagName != "LI") return;
+
+      if (event.ctrlKey || event.metaKey) {
+        toggleSelect(event.target);
+      } else {
+        singleSelect(event.target, ul_2);
+      }
+    }
+    ul_1.onmousedown = function() {
+      return false;
+    };
+    ul_2.onmousedown = function() {
+      return false;
+    };
+
+    function toggleSelect(li) {
+      li.classList.toggle('selected');
+    }
+    function singleSelect(li, my_ul) {
+      let selected = my_ul.querySelectorAll('.selected');
+      for(let elem of selected) {
+        elem.classList.remove('selected');
+      }
+      li.classList.add('selected');
+    }
+
+    myButton_1.onclick = function(event) {
+      $('#ul_2').append( $('#ul_1>li') );
+    }
+    myButton_2.onclick = function(event) {
+      let selected = ul_1.querySelectorAll('.selected');
+      if(selected.length == 0){
+        alert('Выберите не меньше одного элемента!')
+        return;
+      }
+      for(let elem of selected) {
+        elem.classList.remove('selected');
+        $(elem).appendTo('#ul_2');
+      }
+    }
+    myButton_3.onclick = function(event) {
+      let selected = ul_2.querySelectorAll('.selected');
+      if(selected.length == 0){
+        alert('Выберите не меньше одного элемента!')
+        return;
+      }
+      for(let elem of selected) {
+        elem.classList.remove('selected');
+        $(elem).appendTo('#ul_1');
+      }
+    }
+    myButton_4.onclick = function(event) {
+      $('#ul_1').append( $('#ul_2>li') );
+    }
+  </script>
+</body>
