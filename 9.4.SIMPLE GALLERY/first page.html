@@ -11,6 +11,7 @@
   <button id = "Stop">Stop</button>
   <script type="text/javascript">
   var pageList = ["first page.html", "second page.html"];
+  var flag = false;
   function startTimer() {
     var my_timer = document.getElementById("my_timer");
     var time = my_timer.innerHTML;
@@ -32,14 +33,25 @@
       if (m < 10) m = "0" + m;
       s = 59;
     }
+    if(flag == true){
+    	return;
+    }
     else s--;
     if (s < 10) s = "0" + s;
     document.getElementById("my_timer").innerHTML = h+":"+m+":"+s;
     setTimeout(startTimer, 1000);
     }
-    
+
 	Back.onclick = function() {
 		document.location.href = pageList[0];
+	}
+	Start.onclick = function() {
+		flag = false;
+		window.onload = startTimer();
+		
+	}
+	Stop.onclick = function() {
+		flag = true;
 	}
   </script>
   <script src="9.4.SIMPLE GALLERY.js"></script>
