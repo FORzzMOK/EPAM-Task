@@ -1,0 +1,355 @@
+﻿
+@using System;@*Решить проблему с не отображающимися картинками*@
+@using System.Collections.Generic;
+@using Entities;
+@using Users.BLL;
+@using Awards.BLL;
+@using System.Drawing;
+@using System.IO;
+@{
+    UsersManager userManager = new UsersManager();
+    AwardsManager awardManager = new AwardsManager();
+    List<User> usersList = (List<User>)userManager.GetAllUsers();
+
+    Layout = null;
+
+
+    int DelID = -1, editID = -1, editAwardID = -1, RemAwardID = -1;
+    string newName = "", newSurname = "", editName = "", editSurname = "", editAward = "", RemAward = "";
+    DateTime newDateofbirth = new DateTime(), editDateofbirth = new DateTime();
+    if (IsPost)
+    {
+        newName = Request["newName"];
+        newSurname = Request["newSurname"];
+        DateTime.TryParse(Request["newDateOfBirth"], out newDateofbirth);
+
+
+        int.TryParse(Request["delID"], out DelID);
+
+
+        editName = Request["editName"];
+        editSurname = Request["editSurname"];
+        int.TryParse(Request["editID"], out editID);
+        DateTime.TryParse(Request["editDateOfBirth"], out editDateofbirth);
+
+        int.TryParse(Request["editAwardID"], out editAwardID);
+        editAward = Request["editAward"];
+
+        int.TryParse(Request["RemAwardID"], out RemAwardID);
+        RemAward = Request["RemAward"];
+
+        if (RemAwardID != 0 && RemAward != "")
+        {
+            awardManager.RemoveAward(RemAwardID, new Award() { Title = RemAward });
+            RemAwardID = -1;
+            RemAward = "";
+        }
+        if (editAwardID != 0 && editAward != "")
+        {
+            awardManager.AddAward(editAwardID, new Award() { Title = editAward });
+            editAwardID = -1;
+            editAward = "";
+        }
+
+
+        if (editName != "" && editSurname != "" && editDateofbirth > new DateTime(1900, 01, 01))
+        {
+            userManager.EditUser(editID, new Entities.User() { Name = editName, Surname = editSurname, DateOfBirth = editDateofbirth });
+            newName = "";
+            newSurname = "";
+            editID = -1;
+        }
+        if (newName != "" && newSurname != "" && newDateofbirth > new DateTime(1900,01,01))
+        {
+            userManager.AddUser(new Entities.User() { Name = newName, Surname = newSurname, DateOfBirth = newDateofbirth });
+            newName = "";
+            newSurname = "";
+        }
+        if (DelID > 0)
+        {
+            userManager.RemoveUser(DelID);
+            DelID = -1;
+        }
+
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            background-color: #eeeff1;
+        }
+
+        .selected {
+            background: skyblue;
+        }
+
+        .selected_1 {
+            background: black;
+        }
+
+        li {
+            z-index: 2;
+            position: relative;
+            top: -15px;
+            left: -30px;
+            cursor: pointer;
+            list-style-type: none;
+            width: 100%;
+            height: 30px;
+            text
+        }
+
+        .DivAvailable {
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            position: relative;
+            margin-left: 50%;
+            top: 50px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            left: -450px;
+            width: 900px;
+            height: auto;
+            border: 1px solid transparent;
+            border-radius: 3px;
+        }
+
+        .myButtonDiv button {
+            position: relative;
+            color: white;
+            font-size: 13px;
+            background-color: #4876a9;
+            width: 110px;
+            height: 20px;
+            margin: 2px;
+            cursor: pointer;
+            border: 0px;
+            border-radius: 3px;
+        }
+
+        .myButtonDiv {
+            position: absolute;
+            height: auto;
+            width: 300px;
+            top: 58px;
+        }
+
+            .myButtonDiv button:active {
+                background-color: #48627F;
+            }
+
+        #ButtonOption {
+            cursor: pointer;
+        }
+
+        header {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            width: 100%;
+            height: 45px;
+            background-color: #4876a9;
+        }
+
+        #ul_1 td {
+            text-align: center;
+        }
+
+        .ID {
+            height: 100%;
+            margin: 0px;
+            width: 30px;
+        }
+
+        .Image {
+            height: 100%;
+            margin: 0px;
+            width: 150px;
+        }
+
+        .Name {
+            height: 100%;
+            margin: 0px;
+            width: 150px;
+        }
+
+        .Surname {
+            height: 100%;
+            margin: 0px;
+            width: 150px;
+        }
+
+        .DateOfBirth {
+            height: 100%;
+            margin: 0px;
+            width: 100px;
+        }
+
+        .Age {
+            height: 100%;
+            margin: 0px;
+            width: 100px;
+        }
+
+        .Awards {
+            height: 100%;
+            margin: 0px;
+            width: 200px;
+        }
+
+        .ButtonInDiv {
+            margin: 3px;
+            width: 400px;
+            height: 150px;
+            border: 1px solid transparent;
+            border-radius: 2px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+</head>
+<body>
+    <header></header>
+    <div class="myButtonDiv">
+    <form method="post" class="ButtonInDiv">
+        <div class="field">
+            <label for="newName">Name:</label>
+            <input type="text" name="newName" id="newName" />
+        </div>
+        <div class="field">
+            <label for="newSurname">Surname:</label>
+            <input type="text" name="newSurname" id="newSurname" />
+        </div>
+        <div class="field">
+            <label for="newDateOfBirth">Date of birth:</label>
+            <input type="text" name="newDateOfBirth" id="newDateOfBirth" />
+        </div>
+        <button class="myButton_1"> Add user</button>
+    </form>
+    <form method="post" class="ButtonInDiv">
+        <div class="field">
+            <label for="editID">ID:</label>
+            <input type="text" name="editID" id="editID"/>
+        </div>
+        <div class="field">
+            <label for="editName">Name:</label>
+            <input type="text" name="editName" id="editName" />
+        </div>
+        <div class="field">
+            <label for="editSurname">Surname:</label>
+            <input type="text" name="editSurname" id="editSurname" />
+        </div>
+        <div class="field">
+            <label for="editDateOfBirth">Date of birth:</label>
+            <input type="text" name="editDateOfBirth" id="editDateOfBirth" />
+        </div>
+        <button class="myButton_2"> Edit user </button>
+    </form>
+    <form method="post" class="ButtonInDiv">
+        <button class="myButton_3"> Add image </button>
+    </form>
+    <form method="post" class="ButtonInDiv">
+        <div class="field">
+            <label for="delID">Users ID:</label>
+            <input type="text" name="delID" id="delID" />
+        </div>
+        <button class="myButton_4"> Remove user </button>
+    </form>
+    <form method="post" class="ButtonInDiv">
+        <div class="field">
+            <label for="editAwardID">Users ID:</label>
+            <input type="text" name="editAwardID" id="editAwardID" />
+        </div>
+        <div class="field">
+            <label for="editAward">Awadr title:</label>
+            <input type="text" name="editAward" id="editAward" />
+        </div>
+        <button class="myButton_5"> Add award </button>
+    </form>
+    <form method="post" class="ButtonInDiv">
+        <div class="field">
+            <label for="RemAwardID">Users ID:</label>
+            <input type="text" name="RemAwardID" id="RemAwardID" />
+        </div>
+        <div class="field">
+            <label for="RemAward">Awadr:</label>
+            <input type="text" name="RemAward" id="RemAward" />
+        </div>
+        <button class="myButton_6"> Remove award </button>
+    </form>
+    </div>
+    <div class="DivAvailable">
+        <table id="ul_1">
+            <tr>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Date of birth</th>
+                <th>Age</th>
+                <th>Awards</th>
+            </tr>
+            @foreach (User item in usersList)
+            {
+                <tr>
+                    <td class="ID">@item.Id</td>
+                    <td class="Image">
+                        @{
+                            MemoryStream memoryStream = new MemoryStream();
+                            foreach (byte myByte in item.Avatar)
+                            {
+                                memoryStream.WriteByte(myByte);
+                            }
+                            Image image1 = Image.FromStream(memoryStream);
+                            string path = AppDomain.CurrentDomain.BaseDirectory + @"MyPhoto\myPhoto.png";
+                            image1.Save(path, System.Drawing.Imaging.ImageFormat.Png);
+                        }
+                        <img src="C:\Users\pavel\source\repos\10.WEB UI\Web.PL\MyPhoto\stub.png" />
+                    </td>
+                    <td class="Name">@item.Name</td>
+                    <td class="Surname">@item.Surname</td>
+                    <td class="DateOfBirth">@item.DateOfBirth.ToString("yyyy-MM-dd")</td>
+                    <td class="Age">@item.Age</td>
+                    <td class="Awards">@userManager.GetAwardsString(item)</td>
+                </tr>
+            }
+        </table>
+    </div>
+    @*<script>
+            myAllButton.onmousedown = function () {
+                return false;
+            };
+            myButton_1.onclick = function (event) {
+                $('#ul_2').append($('#ul_1>li'));
+            }
+            myButton_2.onclick = function (event) {
+                let selected = ul_1.querySelectorAll('.selected');
+                if (selected.length == 0) {
+                    alert('Выберите не меньше одного элемента!')
+                    return;
+                }
+                for (let elem of selected) {
+                    elem.classList.remove('selected');
+                    $(elem).appendTo('#ul_2');
+                }
+            }
+            myButton_3.onclick = function (event) {
+                let selected = ul_2.querySelectorAll('.selected');
+                if (selected.length == 0) {
+                    alert('Выберите не меньше одного элемента!')
+                    return;
+                }
+                for (let elem of selected) {
+                    elem.classList.remove('selected');
+                    $(elem).appendTo('#ul_1');
+                }
+            }
+            myButton_4.onclick = function (event) {
+                $('#ul_1').append($('#ul_2>li'));
+            }
+        </script>*@
+</body>
+</html>
