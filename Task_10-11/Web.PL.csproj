@@ -91,11 +91,15 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auth.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="UsersAndAwardsWebPages.cshtml" />
+    <Content Include="Administrator.cshtml" />
+    <Content Include="Users.cshtml" />
+    <Content Include="Guests.cshtml" />
+    <Content Include="Authorization.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

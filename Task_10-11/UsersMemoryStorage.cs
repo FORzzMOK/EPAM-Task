@@ -170,32 +170,25 @@ namespace Users.DAL
             }
             return true;
         }
-        public bool AddImage(int user_ID, string path)
+        public bool AddImage(int user_ID, byte[] imageByte)
         {
             if (Users.All(item => item.Id != user_ID))
                 return false;
-            Image image = Image.FromFile(path);
-            MemoryStream memoryStream = new MemoryStream();
-            image.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Jpeg);
-            byte[] image_byte = memoryStream.ToArray();
-            foreach(User user in Users)
-            {
-                if(user.Id == user_ID)
-                {
-                    user.Avatar = image_byte;
-                    break;
-                }
-            }
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand($"UPDATE Users SET Avatar='{image_byte}' WHERE ID={user_ID}", connection);
+                SqlCommand command = new SqlCommand($"UPDATE Users SET Avatar=@Avatar WHERE ID={user_ID}", connection);
+                command.Parameters.Add("@Avatar", SqlDbType.VarBinary, 8000).Value = imageByte;
                 command.ExecuteNonQuery();
             }
-            //MemoryStream memoryStream1 = new MemoryStream();
-            //foreach (byte b1 in b) memoryStream1.WriteByte(b1);
-            //Image image1 = Image.FromStream(memoryStream1);
-            //image1.Save(@"C:\Users\pavel\Desktop\myPhoto.jpeg", System.Drawing.Imaging.ImageFormat.Jpeg);
+            foreach (User user in Users)
+            {
+                if (user.Id == user_ID)
+                {
+                    user.Avatar = imageByte;
+                    break;
+                }
+            }
             return true;
         }
         public ICollection<User> GetAllUsers()

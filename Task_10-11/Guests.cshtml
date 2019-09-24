@@ -1,0 +1,156 @@
+﻿
+@using System;@*Решить проблему с не отображающимися картинками/ добавить загрузку картинок/ добавить авторизацию*@
+@using System.Collections.Generic;
+@using Entities;
+@using Users.BLL;
+@using Awards.BLL;
+@using System.Drawing;
+@using System.IO;
+@{
+    UsersManager userManager = new UsersManager();
+    AwardsManager awardManager = new AwardsManager();
+    List<User> usersList = (List<User>)userManager.GetAllUsers();
+
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            background-color: #eeeff1;
+        }
+        .selected {
+            background: skyblue;
+        }
+        .selected_1 {
+            background: black;
+        }
+        li {
+            z-index: 2;
+            position: relative;
+            top: -15px;
+            left: -30px;
+            cursor: pointer;
+            list-style-type: none;
+            width: 100%;
+            height: 30px;
+            text
+        }
+        .DivAvailable {
+            background-color: white;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            position: absolute;
+            top: 50px;
+            margin-left: 50%;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            left: -350px;
+            width: 700px;
+            height: auto;
+            border: 1px solid transparent;
+            border-radius: 3px;
+        }
+        .myButtonDiv button {
+            position: relative;
+            color: white;
+            font-size: 13px;
+            background-color: #4876a9;
+            width: 110px;
+            height: 20px;
+            margin: 2px;
+            cursor: pointer;
+            border: 0px;
+            border-radius: 3px;
+        }
+        .myButtonDiv {
+            position: absolute;
+            height: auto;
+            width: 300px;
+            top: 58px;
+        }
+            .myButtonDiv button:active {
+                background-color: #48627F;
+            }
+        #ButtonOption {
+            cursor: pointer;
+        }
+        header {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            width: 100%;
+            height: 45px;
+            background-color: #4876a9;
+        }
+        #ul_1 td {
+            text-align: center;
+        }
+        .ID {
+            height: 100%;
+            margin: 0px;
+            width: 30px;
+        }
+        .Image {
+            height: 100%;
+            margin: 0px;
+            width: 150px;
+        }
+        .Name {
+            height: 100%;
+            margin: 0px;
+            width: 150px;
+        }
+        .Surname {
+            height: 100%;
+            margin: 0px;
+            width: 150px;
+        }
+        .DateOfBirth {
+            height: 100%;
+            margin: 0px;
+            width: 100px;
+        }
+        .Age {
+            height: 100%;
+            margin: 0px;
+            width: 100px;
+        }
+        img{
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+</head>
+<body>
+    <header></header>
+    <div class="DivAvailable">
+        <table id="ul_1">
+            <tr>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Date of birth</th>
+                <th>Age</th>
+            </tr>
+            @foreach (User item in usersList)
+            {
+                <tr>
+                    <td class="ID">@item.Id</td>
+                    <td class="Image">
+                        <img src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(item.Avatar))"/>
+                    </td>
+                    <td class="Name">@item.Name</td>
+                    <td class="Surname">@item.Surname</td>
+                    <td class="DateOfBirth">@item.DateOfBirth.ToString("yyyy-MM-dd")</td>
+                    <td class="Age">@item.Age</td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

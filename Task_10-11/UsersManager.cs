@@ -24,10 +24,9 @@ namespace Users.BLL
             if (UsersStorage.EditUser(user_ID, user)) return true;
             else return false;
         }
-        public bool AddImage(int user_ID, string path)
+        public bool AddImage(int user_ID, byte[] imageByte)
         {
-            Console.WriteLine("End_00");
-            if (UsersStorage.AddImage(user_ID, path)) return true;
+            if (UsersStorage.AddImage(user_ID, imageByte)) return true;
             else return false;
         }
         public string GetAwardsString(User user)
