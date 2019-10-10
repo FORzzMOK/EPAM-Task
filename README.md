@@ -9,3 +9,5 @@ Task_06 Completed
 Task_07 Completed
 Task_08 Completed 
 Task_09 Completed
+Task_10-11 Completed
+Final project Completed
