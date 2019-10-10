@@ -41,20 +41,17 @@
                 header nav .formhomePage{
                     left: 0px;
                 }
-                header nav .formfriends {
+                header nav .formnews {
                     left: 50px;
                 }
-                header nav .formnews {
+                header nav .formsearch {
                     left: 100px;
                 }
-                header nav .formsearch {
+                header nav .formsettings {
                     left: 150px;
                 }
-                header nav .formsettings {
-                    left: 200px;
-                }
                 header nav .formsignOut {
-                    left: 250px;
+                    left: 200px;
                 }
                 header nav button {
                     width: 35px;
@@ -64,14 +61,6 @@
                 }
                 header nav .homePage {
                     background-image: url(Images/icon/nav/icons8-главная-100.png);
-                    background-size: contain;
-                    background-position: center;
-                    background-repeat: no-repeat;
-                    background-color: transparent;
-                    border: none;
-                }
-                header nav .friends {
-                    background-image: url(Images/icon/nav/icons8-контакты-100.png);
                     background-size: contain;
                     background-position: center;
                     background-repeat: no-repeat;
@@ -102,6 +91,14 @@
                     background-color: transparent;
                     border: none;
                 }
+                header nav .signOut {
+                    background-image: url(Images/icon/nav/icons8-выход-100.png);
+                    background-size: contain;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-color: transparent;
+                    border: none;
+                }
             section {
                 width: 906px;
                 height: auto;
@@ -118,7 +115,6 @@
     <header>
         <nav class="headNav" id="headNavButton">
             <form action="~/Pages/homePage.cshtml" class="formhomePage"><button class="homePage"></button></form>
-            <form action="~/Pages/friends.cshtml" class="formfriends"><button class="friends"></button></form>
             <form action="~/Pages/news.cshtml" class="formnews"><button class="news"></button></form>
             <form action="~/Pages/search.cshtml" class="formsearch"><button class="search"></button></form>
             <form action="~/Pages/settings.cshtml" class="formsettings"><button class="settings"></button></form>

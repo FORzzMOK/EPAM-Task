@@ -5,10 +5,10 @@
 @using System.IO;
 @{
     Layout = "~/Pages/_Mainlayout.cshtml";
+    string friendsLogin = Request.QueryString["Parameter"].ToString();
     UserMemoryStorage myStorage = new UserMemoryStorage();
-    User user = myStorage.GetUserByLogin(User.Identity.Name.ToString());
-    List<byte[]> photos = myStorage.GetUsersPhoto(User.Identity.Name.ToString());
-    //string mystring = Request.QueryString["Parameter"].ToString();
+    User user = myStorage.GetUserByLogin(friendsLogin);
+    List<byte[]> photos = myStorage.GetUsersPhoto(friendsLogin);
 
 }
 

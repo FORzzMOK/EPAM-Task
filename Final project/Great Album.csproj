@@ -120,6 +120,7 @@
     <Content Include="Pages\Friends.cshtml" />
     <Content Include="Pages\SignOut.cshtml" />
     <Content Include="Pages\Registration.cshtml" />
+    <Content Include="Pages\FriendsPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

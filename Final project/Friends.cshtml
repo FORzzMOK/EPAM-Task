@@ -1,11 +1,12 @@
 ﻿@using Users.DAL;
 @using Entities;
+@using System.Web.UI.WebControls;
+
 @{
     Layout = "~/Pages/_Mainlayout.cshtml";
     UserMemoryStorage myStorage = new UserMemoryStorage();
     List<User> usersList = myStorage.GetUsersList();
 }
-
 <head>
     <style>
         h1 {
@@ -15,6 +16,13 @@
 </head>
 @foreach (User item in usersList)
 {
-    <h1>@item.ToString()</h1>
+<form method="post">
+    <h1></h1>
+    <button id="@item.Login"> @item.ToString() </button>
+</form>
+    if (IsPost)
+    {
+        Response.Redirect("~/Pages/FriendsPage.cshtml?Parameter=" + item.Login);
+    }
 }
 
