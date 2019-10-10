@@ -1,12 +1,12 @@
 ﻿@using System;
 @using System.Collections.Generic;
 @using Entities;
-@using Users.DAL;
+@using Users.BLL;
 @using System.Drawing;
 @using System.IO;
 @{
     Layout = "~/Pages/_Mainlayout.cshtml";
-    UserMemoryStorage myStorage = new UserMemoryStorage();
+    UsersManager myStorage = new UsersManager();
     byte[] myByte = null;
     WebImage avatar = null, photo = null;
 
@@ -43,13 +43,14 @@
         }
 
         photo = WebImage.GetImageFromRequest("Photo");
-        if (photo != null)
+        string title = Request["Title"];
+        if (photo != null && title != "" && title != null)
         {
             MemoryStream memoryStream = new MemoryStream();
             myByte = photo.GetBytes();
-            myStorage.AddPhoto(User.Identity.Name.ToString(), myByte);
+            myStorage.AddPhoto(User.Identity.Name.ToString(), myByte, title);
             photo = null;
-
+            title = null;
         }
 
         avatar = WebImage.GetImageFromRequest("Avatar");
@@ -139,6 +140,7 @@
         <table>
             <tr>
                 <td><label for="Photo">Photo:</label></td>
+                <td><input type="text" name="Title" id="Title" /></td>
                 <td><input type="file" name="Photo" value="Select file" style="width: 115px;" /></td>
                 <td><button class="myButton_3"> Add Photo </button></td>
             </tr>

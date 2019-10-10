@@ -1,10 +1,10 @@
-﻿@using Users.DAL;
+﻿@using Users.BLL;
 @using Entities;
 @using System.Web.UI.WebControls;
 
 @{
     Layout = "~/Pages/_Mainlayout.cshtml";
-    UserMemoryStorage myStorage = new UserMemoryStorage();
+    UsersManager myStorage = new UsersManager();
     List<User> usersList = myStorage.GetUsersList();
 }
 <head>

@@ -1,10 +1,10 @@
 ﻿@using Great_Album;
-@using Users.DAL;
+@using Users.BLL;
 @using Entities;
 @{
     string errorMessage = null;
     string All_Ok = null;
-    UserMemoryStorage myStorage = new UserMemoryStorage();
+    UsersManager myStorage = new UsersManager();
 
     if (IsPost)
     {

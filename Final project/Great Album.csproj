@@ -119,8 +119,6 @@
     <Content Include="Pages\News.cshtml" />
     <Content Include="Pages\Friends.cshtml" />
     <Content Include="Pages\SignOut.cshtml" />
-    <Content Include="Pages\Registration.cshtml" />
-    <Content Include="Pages\FriendsPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -129,13 +127,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary2\Users.DAL.csproj">
-      <Project>{1bf7dfde-4505-4abb-a9a7-e7a4d85d57a8}</Project>
-      <Name>Users.DAL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{386100d8-4620-4e92-973b-3e460e67463b}</Project>
       <Name>Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\User.BLL\User.BLL.csproj">
+      <Project>{3d257f5d-f20b-4440-b7d3-9bd931de2e35}</Project>
+      <Name>User.BLL</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

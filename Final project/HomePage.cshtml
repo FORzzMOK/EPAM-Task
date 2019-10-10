@@ -1,13 +1,13 @@
 ﻿@using System;
-@using Users.DAL;
+@using Users.BLL;
 @using Entities;
 @using System.Drawing;
 @using System.IO;
 @{
     Layout = "~/Pages/_Mainlayout.cshtml";
-    UserMemoryStorage myStorage = new UserMemoryStorage();
+    UsersManager myStorage = new UsersManager();
     User user = myStorage.GetUserByLogin(User.Identity.Name.ToString());
-    List<byte[]> photos = myStorage.GetUsersPhoto(User.Identity.Name.ToString());
+    Dictionary<string, byte[]> photos = myStorage.GetUsersPhoto(User.Identity.Name.ToString());
     //string mystring = Request.QueryString["Parameter"].ToString();
 
 }
@@ -38,7 +38,7 @@
             section .avatarBlock .avatar {
                 height: 100%;
                 width: 100%;
-                background-image: url(@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(user.Avatar)));
+                
                 background-size: cover;
                 background-position: center;
                 border-radius: 4px;
@@ -83,18 +83,29 @@
             }
 
             section .imageBoard .imageBlock {
-                width: 893px;
-                position: relative;
+                height: 800px;
+                width: 870px;
+                background-color: white;
+                border-radius: 5px;
+                padding: 10px;
+                margin: 2px;
+                border: 1px solid #D0D0D0;
             }
 
-                section .imageBoard .imageBlock img {
-                    width: 895px;
+                section .imageBoard .imageBlock .image {
+                    height: 90%;
+                    width: auto%;
+                    background-size: cover;
+                    background-position: center;
+                    border-radius: 4px;
+                    border: 1px solid #D0D0D0;
+                    box-shadow: 0px 0px 10px black;
                 }
     </style>
 </head>
 <div class="hat">
     <div class="avatarBlock">
-        <div class="avatar"></div>
+        <div class="avatar" style="background-image: url(@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(user.Avatar)))"></div>
     </div>
     <div class="info">
         <h1 class="name">@user.Name @user.Surname</h1>
@@ -102,16 +113,17 @@
         <h1>@user.Login</h1>
         <h1>@user.DateOfBirth.ToString("yyyy-MM-dd")</h1>
         <h1>@user.Email</h1>
-
     </div>
 </div>
 
 <div class="imageBoard">
-    @foreach (byte[] photo in photos)
+    @foreach (KeyValuePair<string, byte[]> photo in photos)
     {
-        <img src=@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(photo)) style="width: 300px; height: 300px;" />
+        <div class="imageBlock">
+            <h1>@photo.Key</h1>
+            <div class="image" style="background-image: url(@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(photo.Value)))"></div>
+        </div>
     }
-
 </div>
 <script>
     headButtonBlock.onmousedown = function () {

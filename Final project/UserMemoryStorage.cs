@@ -10,7 +10,7 @@ using System.Drawing;
 
 namespace Users.DAL
 {
-    public class UserMemoryStorage
+    public class UserMemoryStorage : IUserStorable
     {
         private static string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         public User GetUserByLogin(string login)
@@ -158,13 +158,13 @@ namespace Users.DAL
             }
             return true;
         }
-        public bool AddPhoto(string login, byte[] newPhoto)
+        public bool AddPhoto(string login, byte[] newPhoto, string title)
         {
             int PhotoID = 0;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand($"INSERT INTO Photo (Image) VALUES (@Photo);SET @ID=SCOPE_IDENTITY()", connection);
+                SqlCommand command = new SqlCommand($"INSERT INTO Photo (Image, Title) VALUES (@Photo, '{title}');SET @ID=SCOPE_IDENTITY()", connection);
                 command.Parameters.Add("@Photo", SqlDbType.VarBinary).Value = newPhoto;
                 SqlParameter idParam = new SqlParameter("@ID", SqlDbType.Int, 4)
                 {
@@ -182,20 +182,20 @@ namespace Users.DAL
             }
             return true;
         }
-        public List<byte[]> GetUsersPhoto(string login)
+        public Dictionary<string, byte[]> GetUsersPhoto(string login)
         {
-            List<byte[]> photoList = new List<byte[]>();
+            Dictionary<string, byte[]> photoList = new Dictionary<string, byte[]>();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand($"SELECT Image FROM Photo, Communication  WHERE Communication.UserLogin = '{login}' AND Communication.PhotoID = Photo.ID", connection);
+                SqlCommand command = new SqlCommand($"SELECT Image, Title FROM Photo, Communication  WHERE Communication.UserLogin = '{login}' AND Communication.PhotoID = Photo.ID", connection);
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
                         {
-                            photoList.Add((byte[])reader.GetValue(0));
+                            photoList.Add($"{reader.GetValue(1)}", (byte[])reader.GetValue(0));
                         };
                     }
                 }
@@ -203,20 +203,20 @@ namespace Users.DAL
                 return photoList;
             }
         }
-        public List<byte[]> GetAllPhoto()
+        public Dictionary<string, byte[]> GetAllPhoto()
         {
-            List<byte[]> photoList = new List<byte[]>();
+            Dictionary<string, byte[]> photoList = new Dictionary<string, byte[]>();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand($"SELECT Image FROM Photo", connection);
+                SqlCommand command = new SqlCommand($"SELECT Image, Title  FROM Photo", connection);
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
                         {
-                            photoList.Add((byte[])reader.GetValue(0));
+                            photoList.Add($"{reader.GetValue(1)}", (byte[])reader.GetValue(0));
                         };
                     }
                 }

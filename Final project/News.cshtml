@@ -1,8 +1,8 @@
-﻿@using Users.DAL;
+﻿@using Users.BLL;
 @{
     Layout = "~/Pages/_Mainlayout.cshtml";
-    UserMemoryStorage myStorage = new UserMemoryStorage();
-    List<byte[]> photos = myStorage.GetAllPhoto();
+    UsersManager myStorage = new UsersManager();
+    Dictionary<string, byte[]> photos = myStorage.GetAllPhoto();
 }
 
 
@@ -10,12 +10,31 @@
     <meta name="viewport" content="width=device-width" />
     <title></title>
     <style>
-        h1 {
-            border: 1px solid black;
+        .imageBlock {
+            height: 800px;
+            width: 870px;
+            background-color: white;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 2px;
+            border: 1px solid #D0D0D0;
         }
+
+            .imageBlock .image {
+                height: 90%;
+                width: auto%;
+                background-size: cover;
+                background-position: center;
+                border-radius: 4px;
+                border: 1px solid #D0D0D0;
+                box-shadow: 0px 0px 10px black;
+            }
     </style>
 </head>
-@foreach (byte[] photo in photos)
+@foreach (KeyValuePair<string, byte[]> photo in photos)
 {
-    <img src=@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(photo)) style="width: 300px; height: 300px;" />
+    <div class="imageBlock">
+        <h1>@photo.Key</h1>
+        <div class="image" style="background-image: url(@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(photo.Value)))"></div>
+    </div>
 }
