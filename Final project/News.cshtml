@@ -1,0 +1,21 @@
+﻿@using Users.DAL;
+@{
+    Layout = "~/Pages/_Mainlayout.cshtml";
+    UserMemoryStorage myStorage = new UserMemoryStorage();
+    List<byte[]> photos = myStorage.GetAllPhoto();
+}
+
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <style>
+        h1 {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+@foreach (byte[] photo in photos)
+{
+    <img src=@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(photo)) style="width: 300px; height: 300px;" />
+}

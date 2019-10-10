@@ -1,0 +1,20 @@
+﻿@using Users.DAL;
+@using Entities;
+@{
+    Layout = "~/Pages/_Mainlayout.cshtml";
+    UserMemoryStorage myStorage = new UserMemoryStorage();
+    List<User> usersList = myStorage.GetUsersList();
+}
+
+<head>
+    <style>
+        h1 {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+@foreach (User item in usersList)
+{
+    <h1>@item.ToString()</h1>
+}
+
