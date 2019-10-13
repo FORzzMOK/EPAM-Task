@@ -1,14 +1,17 @@
 ﻿@using System;
-@using System.Collections.Generic;
 @using Entities;
 @using Users.BLL;
-@using System.Drawing;
 @using System.IO;
+@using System.Text.RegularExpressions;
 @{
     Layout = "~/Pages/_Mainlayout.cshtml";
+
     UsersManager myStorage = new UsersManager();
     byte[] myByte = null;
     WebImage avatar = null, photo = null;
+    string pattern = @"([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}";
+    Regex rgx = new Regex(pattern);
+    string EmailError = null;
 
     if (IsPost)
     {
@@ -31,13 +34,20 @@
         }
 
         string email = Request["Email"];
-        if(email != null && email != "")
+        if (email != null && email != "")
         {
-            myStorage.EditEmail(User.Identity.Name.ToString(), email);
+            if (rgx.IsMatch(email))
+            {
+                myStorage.EditEmail(User.Identity.Name.ToString(), email);
+            }
+            else
+            {
+                EmailError = "Ivalid email!";
+            }
         }
 
         DateTime.TryParse(Request["DateOfBirth"], out DateTime newDateofbirth);
-        if(newDateofbirth > new DateTime(1900, 01, 01))
+        if (newDateofbirth > new DateTime(1900, 01, 01))
         {
             myStorage.EditDateOfBirth(User.Identity.Name.ToString(), newDateofbirth);
         }
@@ -68,25 +78,33 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title></title>
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <style>
         .myButtonDiv {
             background-color: white;
             margin: 3px;
-            width: 900px;
+            width: auto;
             height: auto;
             border: 1px solid transparent;
             border-radius: 2px;
             box-shadow: 0 0 5px rgba(0,0,0,0.2);
         }
+
+            .myButtonDiv td {
+            }
     </style>
 </head>
-
+@if (EmailError != null)
+{
+    <div class="Error">@EmailError</div>
+    EmailError = null;
+}
 <div class="myButtonDiv">
     <form method="post" class="ButtonInDiv">
         <table>
             <tr>
                 <td><label for="Name">Name:</label></td>
-                <td><input type="text" name="Name" id="Name" /></td>
+                <td><input type="text" name="Name" id="Name" maxlength="50" /></td>
                 <td><button class="myButton_1"> Edit Name</button></td>
             </tr>
         </table>
@@ -95,7 +113,7 @@
         <table>
             <tr>
                 <td><label for="Surame">Surame:</label></td>
-                <td><input type="text" name="Surame" id="Surame" /></td>
+                <td><input type="text" name="Surame" id="Surame" maxlength="50" /></td>
                 <td><button class="myButton_1"> Edit Surame</button></td>
             </tr>
         </table>
@@ -113,7 +131,7 @@
         <table>
             <tr>
                 <td><label for="Status">Status:</label></td>
-                <td><input type="text" name="Status" id="Status" /></td>
+                <td><input type="text" name="Status" id="Status" maxlength="100" /></td>
                 <td><button class="myButton_1"> Edit Status</button></td>
             </tr>
         </table>
@@ -122,7 +140,7 @@
         <table>
             <tr>
                 <td><label for="Email">Email:</label></td>
-                <td><input type="text" name="Email" id="Email" /></td>
+                <td><input type="text" name="Email" id="Email" maxlength="50" /></td>
                 <td><button class="myButton_1"> Edit Email</button></td>
             </tr>
         </table>
@@ -131,7 +149,7 @@
         <table>
             <tr>
                 <td><label for="Avatar">Avatar:</label></td>
-                <td><input type="file" name="Avatar" value="Select file" style="width: 115px;" /></td>
+                <td><input type="file" name="Avatar" value="Select file" accept="image/*" style="width: 115px;" /></td>
                 <td><button class="myButton_3"> Edit Avatar </button></td>
             </tr>
         </table>
@@ -140,8 +158,8 @@
         <table>
             <tr>
                 <td><label for="Photo">Photo:</label></td>
-                <td><input type="text" name="Title" id="Title" /></td>
-                <td><input type="file" name="Photo" value="Select file" style="width: 115px;" /></td>
+                <td><input type="text" name="Title" id="Title" value="Enter image description" /></td>
+                <td><input type="file" name="Photo" value="Select file" accept="image/*" style="width: 115px;" /></td>
                 <td><button class="myButton_3"> Add Photo </button></td>
             </tr>
         </table>

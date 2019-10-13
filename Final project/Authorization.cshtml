@@ -115,6 +115,12 @@
     @if (errorMessage != null)
     {
         <div class="Error">@errorMessage</div>
+        errorMessage = null;
+    }
+    @if (All_Ok != null)
+    {
+        <div class="All Ok">@All_Ok</div>
+        All_Ok = null;
     }
     <div class="Auth" id="auth">
         <form action="~/Pages/Authorization.cshtml" method="post">
@@ -133,10 +139,6 @@
         </form>
         <button id="RegB"> Registration </button>
     </div>
-    @if (All_Ok != null)
-    {
-        <div class="All Ok">@All_Ok</div>
-    }
     <div id="Reg">
         <form action="~/Pages/Authorization.cshtml" method="post">
             <h1>Registration</h1>
@@ -146,7 +148,7 @@
                     <td><input type="text" name="newlogin" value="" /></td>
                 </tr>
                 <tr>
-                    <td><label for="newname">Name:</label></td>
+                    <td><label for="newname">New Name:</label></td>
                     <td><input type="text" name="newname" value="" /></td>
                 </tr>
                 <tr>
@@ -166,7 +168,7 @@
         </form>
         <button id="AutB"> Authorization </button>
     </div>
-    
+
     <script>
         RegB.onclick = function (event) {
             $("#Reg").css("display", "block");
